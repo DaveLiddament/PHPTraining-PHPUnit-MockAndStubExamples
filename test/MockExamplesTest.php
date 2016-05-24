@@ -99,4 +99,15 @@ class MockExamplesTest extends \PHPUnit_Framework_TestCase
         $this->calculator->calculate(6, 8);
     }
 
+
+    public function testReturningValues()
+    {
+        $this->calculator->expects($this->any())
+            ->method("calculate")
+            ->withConsecutive([4, $this->anything()], [5, 5])
+            ->willReturnOnConsecutiveCalls(7, 8);
+        $this->assertEquals(7, $this->calculator->calculate(4, 5));
+        $this->assertEquals(8, $this->calculator->calculate(5, 5));
+    }
+
 }
